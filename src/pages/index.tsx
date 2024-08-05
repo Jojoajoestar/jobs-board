@@ -3,7 +3,7 @@ import Hero from '../components/Hero';
 import HomeCards from '../components/HomeCards';
 import JobListings from '../components/JobListings';
 import Layout from '../components/Layout';
-import { Job } from '../types';
+import { Job } from '../types/types';
 import Link from 'next/link';
 
 // Fetching jobs data from the server-side

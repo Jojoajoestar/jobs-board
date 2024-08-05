@@ -6,6 +6,8 @@ export interface Job {
   description: string;
   location: string;
   salary: string;
+  datePosted: string;
+  experienceLevel: string;
   company: {
     name: string;
     description: string;

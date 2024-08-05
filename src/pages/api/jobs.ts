@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Job } from '../../types';
+import { Job } from '../../types/types';
 
 const jobs: Job[] = [
   {
@@ -10,6 +10,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$20 - $30 / Hour",
     datePosted: "2023-01-01",
+    experienceLevel: "Entry",
     company: {
       name: "SmallBiz IT Solutions",
       description: "SmallBiz IT Solutions provides comprehensive remote IT support for small businesses, ensuring they run smoothly with minimal downtime.",
@@ -25,6 +26,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$50 - $70 / Hour",
     datePosted: "2023-02-01",
+    experienceLevel: "Senior",
     company: {
       name: "Consulting Experts",
       description: "Consulting Experts specializes in providing top-notch IT consulting services to small businesses, helping them with their IT strategy and implementation.",
@@ -40,6 +42,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$60K - $80K / Year",
     datePosted: "2023-03-01",
+    experienceLevel: "Mid",
     company: {
       name: "TechSupport Co.",
       description: "TechSupport Co. offers dedicated IT support services to small businesses, ensuring their technology systems are always operational.",
@@ -55,6 +58,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$70K - $90K / Year",
     datePosted: "2023-04-01",
+    experienceLevel: "Senior",
     company: {
       name: "SysAdmin Services",
       description: "SysAdmin Services provides system administration services to small businesses, focusing on maintaining server uptime and security.",
@@ -70,6 +74,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$25 - $35 / Hour",
     datePosted: "2023-05-01",
+    experienceLevel: "Entry",
     company: {
       name: "Helpdesk Heroes",
       description: "Helpdesk Heroes specializes in providing remote helpdesk support to small businesses, ensuring their issues are resolved quickly and efficiently.",
@@ -85,6 +90,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$90K - $110K / Year",
     datePosted: "2023-06-01",
+    experienceLevel: "Senior",
     company: {
       name: "Project IT",
       description: "Project IT manages IT projects for small businesses, ensuring they are completed on time and within budget.",
@@ -100,6 +106,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$40K - $50K / Year",
     datePosted: "2023-07-01",
+    experienceLevel: "Entry",
     company: {
       name: "SmallBiz IT Solutions",
       description: "SmallBiz IT Solutions provides comprehensive remote IT support for small businesses, ensuring they run smoothly with minimal downtime.",
@@ -115,6 +122,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$80K - $100K / Year",
     datePosted: "2023-08-01",
+    experienceLevel: "Senior",
     company: {
       name: "SecureNet Solutions",
       description: "SecureNet Solutions specializes in providing network security services to small businesses, ensuring their data remains protected.",
@@ -130,6 +138,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$100K - $120K / Year",
     datePosted: "2023-09-01",
+    experienceLevel: "Senior",
     company: {
       name: "CloudExperts",
       description: "CloudExperts provides cloud consulting services to small businesses, helping them migrate to and optimize cloud environments.",
@@ -145,6 +154,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$30 - $40 / Hour",
     datePosted: "2023-10-01",
+    experienceLevel: "Mid",
     company: {
       name: "SupportDesk Inc.",
       description: "SupportDesk Inc. offers desktop support services to small businesses, ensuring their employees can work without technical issues.",
@@ -160,6 +170,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$110K - $130K / Year",
     datePosted: "2023-11-01",
+    experienceLevel: "Senior",
     company: {
       name: "OpsManage Solutions",
       description: "OpsManage Solutions provides IT operations management services to small businesses, ensuring their IT infrastructure runs smoothly.",
@@ -175,6 +186,7 @@ const jobs: Job[] = [
     location: "Remote",
     salary: "$70K - $90K / Year",
     datePosted: "2023-12-01",
+    experienceLevel: "Mid",
     company: {
       name: "TechHelp Co.",
       description: "TechHelp Co. offers technical support services to small businesses, ensuring their IT systems are always operational.",
@@ -198,16 +210,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         filteredJobs = filteredJobs.filter(j => j.type === query.type);
       }
       if (query.location) {
-        filteredJobs = filteredJobs.filter(j => j.location.toLowerCase().includes(query.location.toLowerCase()));
+        filteredJobs = filteredJobs.filter(j => j.location.toLowerCase().includes((query.location as string).toLowerCase()));
       }
       if (query.salary) {
-        filteredJobs = filteredJobs.filter(j => j.salary.toLowerCase().includes(query.salary.toLowerCase()));
+        filteredJobs = filteredJobs.filter(j => j.salary.toLowerCase().includes((query.salary as string).toLowerCase()));
       }
       if (query.datePosted) {
         filteredJobs = filteredJobs.filter(j => new Date(j.datePosted) >= new Date(query.datePosted as string));
       }
       if (query.companyName) {
-        filteredJobs = filteredJobs.filter(j => j.company.name.toLowerCase().includes(query.companyName.toLowerCase()));
+        filteredJobs = filteredJobs.filter(j => j.company.name.toLowerCase().includes((query.companyName as string).toLowerCase()));
       }
       if (query.experienceLevel) {
         filteredJobs = filteredJobs.filter(j => j.experienceLevel === query.experienceLevel);

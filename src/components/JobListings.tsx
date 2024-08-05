@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Job } from '../types';
+import { Job } from '../types/types';
 
 interface JobListingsProps {
   jobs: Job[];

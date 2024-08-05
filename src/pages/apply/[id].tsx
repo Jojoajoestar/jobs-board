@@ -1,233 +1,93 @@
-/**
- * ApplyPage Component
- *
- * This component renders the application page for a specific job.
- * It fetches job details using the job ID from the URL and provides a form for job applications.
- *
- * Example:
- * <ApplyPage />
- */
-
-import React, { useState, useEffect } from 'react';
+// src/pages/apply/[id].tsx
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { TextField, Button, CircularProgress, Box, Typography } from '@mui/material';
+import { Job } from '../../types/types';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { FaSpinner } from 'react-icons/fa';
-import { toast, ToastContainer } from 'react-toastify';
-import Head from 'next/head';
-import 'react-toastify/dist/ReactToastify.css';
-import {
-  Container,
-  TextField,
-  Button,
-  Typography,
-  Paper,
-  Box,
-  CircularProgress,
-} from '@mui/material';
-import { styled } from '@mui/system';
 
-// Styled components
-const StyledContainer = styled(Container)(({ theme }) => ({
-  marginTop: theme.spacing(4),
-  marginBottom: theme.spacing(4),
-}));
+// Mock function for job application submission
+const submitJobApplication = async (jobId: string, name: string, email: string) => {
+  // Replace with actual job application submission logic
+  return new Promise<void>((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.5) {
+        resolve();
+      } else {
+        reject(new Error('Failed to submit application. Please try again.'));
+      }
+    }, 2000);
+  });
+};
 
-const StyledPaper = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(4),
-  [theme.breakpoints.up('md')]: {
-    padding: theme.spacing(6),
-  },
-}));
-
-const ApplyPage: React.FC = () => {
+const ApplyJobPage: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [job, setJob] = useState<any | null>(null); // Use any type for job initially
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
-  // Fetch job details based on the job ID from the URL
-  useEffect(() => {
-    const fetchJob = async () => {
-      if (id) {
-        const response = await fetch(`/api/jobs?id=${id}`);
-        const data = await response.json();
-        setJob(data.data);
-      }
-    };
-
-    fetchJob();
-  }, [id]);
-
-  // Handle form submission for job application
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
     setError(null);
-    setSuccess(null);
-
-    const formData = new FormData(e.currentTarget);
 
     try {
-      const res = await fetch(`/api/apply`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!res.ok) throw new Error('Failed to submit application');
-      setSuccess('Application submitted successfully');
+      await submitJobApplication(id as string, name, email);
       toast.success('Application submitted successfully');
-    } catch (err) {
-      setError(err.message);
-      toast.error('Failed to submit application');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+        toast.error(err.message);
+      } else {
+        setError('An unknown error occurred');
+        toast.error('An unknown error occurred');
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  // Render a loading spinner if the job details are still being fetched
-  if (!job) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-        <CircularProgress />
-      </Box>
-    );
-  }
-
   return (
     <>
-      <Head>
-        <title>Apply for {job.title} | IT Jobs</title>
-      </Head>
-      <Navbar isStatic alwaysBlue />
-      <StyledContainer maxWidth="md">
-        <StyledPaper elevation={3}>
-          <Typography variant="h4" component="h1" align="center" gutterBottom>
-            Apply for {job.title}
-          </Typography>
-          <Typography variant="h6" component="h2" gutterBottom>
-            Job Details
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>Company:</strong> {job.company.name}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>Location:</strong> {job.location}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>Salary:</strong> {job.salary}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            {job.description}
-          </Typography>
-
-          <Typography variant="h6" component="h2" gutterBottom>
-            Application Form
-          </Typography>
-          {loading && (
-            <Box display="flex" justifyContent="center" mb={2}>
-              <CircularProgress />
-              <Typography variant="body1" color="primary" ml={2}>
-                Submitting your application...
-              </Typography>
-            </Box>
-          )}
+      <Navbar />
+      <Box component="main" sx={{ padding: '2rem' }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Apply for Job
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Name"
+            fullWidth
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            sx={{ marginBottom: '1rem' }}
+          />
+          <TextField
+            label="Email"
+            type="email"
+            fullWidth
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            sx={{ marginBottom: '1rem' }}
+          />
+          <Button type="submit" variant="contained" color="primary" disabled={loading}>
+            {loading ? <CircularProgress size={24} /> : 'Apply'}
+          </Button>
           {error && (
-            <Typography variant="body1" color="error" align="center" gutterBottom>
+            <Typography color="error" sx={{ marginTop: '1rem' }}>
               {error}
             </Typography>
           )}
-          {success && (
-            <Typography variant="body1" color="success" align="center" gutterBottom>
-              {success}
-            </Typography>
-          )}
-          <form onSubmit={handleSubmit}>
-            <Box mb={3}>
-              <TextField
-                label="Name"
-                name="name"
-                fullWidth
-                required
-                variant="outlined"
-                placeholder="John Doe"
-              />
-            </Box>
-            <Box mb={3}>
-              <TextField
-                label="Email"
-                name="email"
-                type="email"
-                fullWidth
-                required
-                variant="outlined"
-                placeholder="johndoe@example.com"
-              />
-            </Box>
-            <Box mb={3}>
-              <TextField
-                label="Phone"
-                name="phone"
-                type="tel"
-                fullWidth
-                required
-                variant="outlined"
-                placeholder="(123) 456-7890"
-              />
-            </Box>
-            <Box mb={3}>
-              <TextField
-                label="Resume"
-                name="resume"
-                type="file"
-                fullWidth
-                required
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-              />
-            </Box>
-            <Box mb={3}>
-              <TextField
-                label="Cover Letter"
-                name="coverLetter"
-                multiline
-                rows={4}
-                fullWidth
-                required
-                variant="outlined"
-                placeholder="Why are you a good fit for this job?"
-              />
-            </Box>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              disabled={loading}
-            >
-              Submit Application
-            </Button>
-          </form>
-        </StyledPaper>
-      </StyledContainer>
+        </form>
+      </Box>
       <Footer />
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </>
   );
 };
 
-export default ApplyPage;
+export default ApplyJobPage;

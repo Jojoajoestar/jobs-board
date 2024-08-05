@@ -15,7 +15,8 @@ import ClipLoader from 'react-spinners/ClipLoader';
 
 const override = {
   display: 'block',
-  margin: '100px auto',
+  margin: '0 auto',
+  borderColor: 'red',
 };
 
 interface SpinnerProps {
@@ -24,12 +25,14 @@ interface SpinnerProps {
 
 const Spinner: React.FC<SpinnerProps> = ({ loading }) => {
   return (
+    <div className="sweet-loading">
     <ClipLoader
       color='#4338ca'
-      loading={loading}
+      loading={true} 
       cssOverride={override}
       size={150}
     />
+    </div>
   );
 };
 

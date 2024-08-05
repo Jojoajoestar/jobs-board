@@ -1,3 +1,13 @@
+/**
+ * AdvertisersPage Component
+ *
+ * This component renders the Advertisers page.
+ * It provides information on advertising opportunities with the IT Jobs platform.
+ *
+ * Example:
+ * <AdvertisersPage />
+ */
+
 import React from 'react';
 import { Container, Typography, Paper } from '@mui/material';
 import { styled } from '@mui/system';

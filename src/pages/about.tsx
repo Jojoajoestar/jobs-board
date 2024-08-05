@@ -1,3 +1,13 @@
+/**
+ * AboutPage Component
+ *
+ * This component renders the About Us page.
+ * It provides information about the IT Jobs platform.
+ *
+ * Example:
+ * <AboutPage />
+ */
+
 import React from 'react';
 import { Container, Typography, Paper } from '@mui/material';
 import { styled } from '@mui/system';

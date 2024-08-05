@@ -1,3 +1,13 @@
+/**
+ * TermsOfServicePage Component
+ *
+ * This component renders the Terms of Service page.
+ * It provides information on the terms and conditions for using the IT Jobs platform.
+ *
+ * Example:
+ * <TermsOfServicePage />
+ */
+
 import React from 'react';
 import { Container, Typography, Paper } from '@mui/material';
 import { styled } from '@mui/system';

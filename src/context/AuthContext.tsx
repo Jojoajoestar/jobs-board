@@ -1,17 +1,4 @@
-/**
- * AuthContext and AuthProvider
- *
- * This file provides authentication context for the application using Firebase.
- * It includes the context, provider, and a hook for accessing the context.
- *
- * Example:
- * <AuthProvider>
- *   <YourComponent />
- * </AuthProvider>
- *
- * Hook:
- * const { currentUser } = useAuth();
- */
+// src/context/AuthContext.tsx
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
@@ -41,3 +28,5 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 export const useAuth = () => {
   return useContext(AuthContext);
 };
+
+export { AuthContext };

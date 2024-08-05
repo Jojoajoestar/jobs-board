@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import JobListings from '../components/JobListings';
 import JobFilter from '../components/JobFilter';
 import Footer from '../components/Footer';
-import { Job } from '../types';
+import { Job } from '../types/types';
 
 export async function getServerSideProps() {
   const res = await fetch('http://localhost:3000/api/jobs');

@@ -1,13 +1,4 @@
-/**
- * SignUpPage Component
- *
- * This component renders the sign-up form for new users to create an account.
- * It uses Formik for form handling and validation with Yup.
- *
- * Example:
- * <SignUpPage />
- */
-
+// src/pages/signup.tsx
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -70,7 +61,7 @@ const SignUpPage: React.FC = () => {
         .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain a special character.')
         .required('Required'),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .oneOf([Yup.ref('password'), undefined], 'Passwords must match')
         .required('Required'),
       agreeToTerms: Yup.boolean()
         .required('Required')
@@ -100,7 +91,6 @@ const SignUpPage: React.FC = () => {
             <Box mb={3}>
               <TextField
                 label="Name"
-                name="name"
                 fullWidth
                 required
                 variant="outlined"
@@ -112,7 +102,6 @@ const SignUpPage: React.FC = () => {
             <Box mb={3}>
               <TextField
                 label="Email"
-                name="email"
                 type="email"
                 fullWidth
                 required
@@ -125,7 +114,6 @@ const SignUpPage: React.FC = () => {
             <Box mb={3}>
               <TextField
                 label="Password"
-                name="password"
                 type="password"
                 fullWidth
                 required
@@ -138,7 +126,6 @@ const SignUpPage: React.FC = () => {
             <Box mb={3}>
               <TextField
                 label="Confirm Password"
-                name="confirmPassword"
                 type="password"
                 fullWidth
                 required
@@ -175,7 +162,6 @@ const SignUpPage: React.FC = () => {
                     checked={formik.values.agreeToTerms}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    error={formik.touched.agreeToTerms && Boolean(formik.errors.agreeToTerms)}
                   />
                 }
                 label="I agree to the terms and conditions"
