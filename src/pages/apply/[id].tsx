@@ -1,24 +1,25 @@
-// src/pages/apply/[id].tsx
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { TextField, Button, CircularProgress, Box, Typography } from '@mui/material';
-import { Job } from '../../types/types';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
-// Mock function for job application submission
 const submitJobApplication = async (jobId: string, name: string, email: string) => {
-  // Replace with actual job application submission logic
-  return new Promise<void>((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() > 0.5) {
-        resolve();
-      } else {
-        reject(new Error('Failed to submit application. Please try again.'));
-      }
-    }, 2000);
-  });
+  try {
+    const res = await fetch('/api/applications', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ jobId, name, email }),
+    });
+    if (!res.ok) {
+      throw new Error('Failed to submit application');
+    }
+  } catch (error) {
+    throw error;
+  }
 };
 
 const ApplyJobPage: React.FC = () => {
