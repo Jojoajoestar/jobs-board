@@ -1,13 +1,3 @@
-/**
- * AboutPage Component
- *
- * This component renders the About Us page.
- * It provides information about the IT Jobs platform.
- *
- * Example:
- * <AboutPage />
- */
-
 import React from 'react';
 import { Container, Typography, Paper } from '@mui/material';
 import { styled } from '@mui/system';
@@ -31,7 +21,7 @@ const AboutPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>About Us | IT Jobs</title>
+        <title>About Us</title>
       </Head>
       <Navbar isStatic alwaysBlue />
       <main>
@@ -41,13 +31,13 @@ const AboutPage: React.FC = () => {
               About Us
             </Typography>
             <Typography variant="body1" gutterBottom>
-              Welcome to IT Jobs, your number one source for all things IT. We're dedicated to providing you the best of job listings, with a focus on dependability, customer service, and uniqueness.
+              Welcome to IT Jobs, your number one source for all things IT. We are dedicated to providing you the best of job listings, with a focus on dependability, customer service, and uniqueness.
             </Typography>
             <Typography variant="body1" gutterBottom>
               Founded in 2023, IT Jobs has come a long way from its beginnings. When we first started out, our passion for helping people find their dream job drove us to start our own business.
             </Typography>
             <Typography variant="body1" gutterBottom>
-              We hope you enjoy our job listings as much as we enjoy offering them to you. If you have any questions or comments, please don't hesitate to contact us.
+              We hope you enjoy our job listings as much as we enjoy offering them to you. If you have any questions or comments, please do not hesitate to contact us.
             </Typography>
             <Typography variant="body1" gutterBottom>
               Sincerely, The IT Jobs Team

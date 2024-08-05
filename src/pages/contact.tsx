@@ -1,13 +1,3 @@
-/**
- * ContactPage Component
- *
- * This component renders the Contact Us page.
- * It provides a form for users to submit their questions or comments.
- *
- * Example:
- * <ContactPage />
- */
-
 import React from 'react';
 import { Container, Typography, Paper, Box, TextField, Button } from '@mui/material';
 import { styled } from '@mui/system';
@@ -29,7 +19,6 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 const ContactPage: React.FC = () => {
-  // Handle form submission
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     alert('Contact form submitted');
@@ -38,7 +27,7 @@ const ContactPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Contact Us | IT Jobs</title>
+        <title>Contact Us</title>
       </Head>
       <Navbar isStatic alwaysBlue />
       <StyledContainer maxWidth="md">
@@ -47,7 +36,7 @@ const ContactPage: React.FC = () => {
             Contact Us
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Have questions or comments? We'd love to hear from you. Please fill out the form below, and we will get in touch with you as soon as possible.
+            Have questions or comments? We would love to hear from you. Please fill out the form below, and we will get in touch with you as soon as possible.
           </Typography>
           <Box component="form" onSubmit={handleSubmit} mt={3}>
             <TextField label="Name" fullWidth required variant="outlined" margin="normal" />

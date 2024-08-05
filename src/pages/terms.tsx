@@ -1,13 +1,3 @@
-/**
- * TermsOfServicePage Component
- *
- * This component renders the Terms of Service page.
- * It provides information on the terms and conditions for using the IT Jobs platform.
- *
- * Example:
- * <TermsOfServicePage />
- */
-
 import React from 'react';
 import { Container, Typography, Paper } from '@mui/material';
 import { styled } from '@mui/system';
@@ -31,7 +21,7 @@ const TermsOfServicePage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Terms of Service | IT Jobs</title>
+        <title>Terms of Service</title>
       </Head>
       <Navbar isStatic alwaysBlue />
       <StyledContainer maxWidth="md">
@@ -46,7 +36,7 @@ const TermsOfServicePage: React.FC = () => {
             Acceptance of the Terms of Service
           </Typography>
           <Typography variant="body1" gutterBottom>
-            By accessing this website, we assume you accept these terms and conditions in full. Do not continue to use IT Jobs' website if you do not accept all of the terms and conditions stated on this page.
+            By accessing this website, we assume you accept these terms and conditions in full. Do not continue to use IT Jobs website if you do not accept all of the terms and conditions stated on this page.
           </Typography>
           <Typography variant="h6" component="h2" gutterBottom>
             Changes to the Terms of Service

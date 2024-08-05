@@ -1,13 +1,3 @@
-/**
- * LoginPage Component
- *
- * This component renders the login form for users to sign in.
- * It uses Formik for form handling and validation with Yup.
- *
- * Example:
- * <LoginPage />
- */
-
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -83,7 +73,9 @@ const LoginPage: React.FC = () => {
                   fullWidth
                   required
                   variant="outlined"
-                  {...formik.getFieldProps('email')}
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
                 />
@@ -96,7 +88,9 @@ const LoginPage: React.FC = () => {
                   fullWidth
                   required
                   variant="outlined"
-                  {...formik.getFieldProps('password')}
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   error={formik.touched.password && Boolean(formik.errors.password)}
                   helperText={formik.touched.password && formik.errors.password}
                 />
@@ -106,7 +100,7 @@ const LoginPage: React.FC = () => {
                   Forgot my password
                 </MuiLink>
                 <MuiLink component={Link} href="/signup" underline="hover">
-                  Don't have an account? Sign Up
+                  Don&apos;t have an account? Sign Up
                 </MuiLink>
               </Box>
               <Button

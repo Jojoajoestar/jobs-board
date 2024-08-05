@@ -1,13 +1,3 @@
-/**
- * AdvertisersPage Component
- *
- * This component renders the Advertisers page.
- * It provides information on advertising opportunities with the IT Jobs platform.
- *
- * Example:
- * <AdvertisersPage />
- */
-
 import React from 'react';
 import { Container, Typography, Paper } from '@mui/material';
 import { styled } from '@mui/system';
@@ -31,7 +21,7 @@ const AdvertisersPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Advertisers | IT Jobs</title>
+        <title>Advertisers</title>
       </Head>
       <Navbar isStatic alwaysBlue />
       <StyledContainer maxWidth="md">
@@ -46,7 +36,7 @@ const AdvertisersPage: React.FC = () => {
             Why Advertise with Us?
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Our platform attracts a dedicated audience of individuals interested in the IT industry. Whether you're looking to promote job listings, products, or services, we can help you connect with the right audience.
+            Our platform attracts a dedicated audience of individuals interested in the IT industry. Whether you are looking to promote job listings, products, or services, we can help you connect with the right audience.
           </Typography>
           <Typography variant="h6" component="h2" gutterBottom>
             Advertising Options
